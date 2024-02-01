@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProfileSyncApp.Views.LoginPage"
+             Shell.NavBarIsVisible="False"
+             xmlns:mct="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+             Title="LoginPage">
+    <VerticalStackLayout Padding="10" VerticalOptions="Center" HorizontalOptions="CenterAndExpand">
+        
+        <Label Text="Welcome to Profile Sync App" FontSize="24" FontAttributes="Bold" Margin="0,0,0,30" />
+        <Label FontFamily="Consolas" Text="Email"/>
+        <Frame CornerRadius="10" Padding="3" Margin="0,5,0,0">
+            <Entry x:Name="Email" Text="{Binding Email,Mode=TwoWay}" Margin="5,0,0,0" Placeholder="Email" FontSize="18">
+            </Entry>
+        </Frame>
+        <Label FontFamily="Consolas" Text="Password"/>
+        <Frame CornerRadius="10" Padding="3" Margin="0,5,0,0">
+            <Entry x:Name="Password" Text="{Binding Password,Mode=TwoWay}" Margin="5,0,0,0" Placeholder="Password"
+IsPassword="True" FontSize="18">
+                <Entry.Behaviors>
+
+                </Entry.Behaviors>
+            </Entry>
+        </Frame>
+        <Button Margin="0,20,0,0"
+                       x:Name="LoginButton"
+                       Clicked="LoginButton_Clicked"
+                       Text="Login" VerticalOptions="CenterAndExpand" 
+                       HorizontalOptions="FillAndExpand"/>
+
+        <BoxView Color="Black" Margin="0,20,0,20" HeightRequest="2" HorizontalOptions="Fill" />
+        <Button Margin="0,0,0,0"
+                x:Name="SignupButton"
+                Clicked="SignupButton_Clicked"
+                Text="Create Account" VerticalOptions="CenterAndExpand"
+                BackgroundColor="{AppThemeBinding Light={StaticResource Tertiary}, Dark={StaticResource White}}"
+                HorizontalOptions="FillAndExpand"/>
+    </VerticalStackLayout>
+
+</ContentPage>

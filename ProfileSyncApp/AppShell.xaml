@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="ProfileSyncApp.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:ProfileSyncApp"
+    xmlns:views="clr-namespace:ProfileSyncApp.Views"
+    Shell.FlyoutBehavior="Disabled">
+
+    <!--Loading Page-->
+    <ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate views:LoadingPage}"
+        Route="loading" />
+
+    <!--Login Page-->
+    <ShellContent 
+        Title="Login" 
+        ContentTemplate="{DataTemplate views:LoginPage}"
+        Route="login"/>
+    
+    <!--Main Page-->
+    <TabBar>
+        <Tab Title="Home" Icon="house_door_fill.svg">
+            <ShellContent
+                Icon="house_door_fill.svg"
+                Title="Home"
+                ContentTemplate="{DataTemplate views:HomePage}"
+                Route="home" />
+        </Tab>
+
+        <Tab Title="Profile" Icon="house_door_fill.svg">
+            <ShellContent
+                Icon="house_door_fill.svg"
+                Title="Profile"
+                ContentTemplate="{DataTemplate views:ProfilePage}"
+                Route="profile" />
+        </Tab>
+
+        <Tab Title="Settings" Icon="gear_fill.svg">
+            <ShellContent
+                Icon="house_door_fill.svg"
+                Title="Settings"
+                ContentTemplate="{DataTemplate views:SettingsPage}"
+                Route="settings" />
+        </Tab>
+    </TabBar>
+</Shell>
