@@ -5,7 +5,7 @@ VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProfileSyncApp", "ProfileSyncApp.csproj", "{CB14FCD3-816A-408A-852F-9B12A5166A66}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProfileSync.API", "..\ProfileSync.API\ProfileSync.API.csproj", "{F15F07A7-D090-4DF7-9CFD-E22D8EE6456E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProfileSync.API", "..\ProfileSync.API\ProfileSync.API.csproj", "{F15F07A7-D090-4DF7-9CFD-E22D8EE6456E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
