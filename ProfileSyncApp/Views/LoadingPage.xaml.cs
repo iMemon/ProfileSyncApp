@@ -2,10 +2,12 @@ namespace ProfileSyncApp.Views;
 
 public partial class LoadingPage : ContentPage
 {
-    public LoadingPage()
+    IConnectivity connectivity;
+    public LoadingPage(IConnectivity connectivity)
     {
         InitializeComponent();
-
+        this.connectivity = connectivity;
+        Console.WriteLine("test");
     }
     protected override async void OnNavigatedTo(NavigatedToEventArgs args)
     {

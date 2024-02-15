@@ -2,8 +2,10 @@
 
 public partial class HomePage : ContentPage
 {
-    public HomePage()
+    IConnectivity connectivity;
+    public HomePage(IConnectivity connectivity)
     {
         InitializeComponent();
+        this.connectivity = connectivity;
     }
 }

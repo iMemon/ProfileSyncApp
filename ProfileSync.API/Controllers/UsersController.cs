@@ -52,7 +52,7 @@ namespace ProfileSync.API.Controllers
                 }
                 else
                 {
-                    return Ok();
+                    return Ok(user);
                 }
             }
             catch (Exception)
