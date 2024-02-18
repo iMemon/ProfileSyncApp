@@ -1,4 +1,4 @@
-﻿namespace ProfileSyncApp.Views;
+﻿namespace ProfileSyncApp.Pages;
 
 public partial class HomePage : ContentPage
 {

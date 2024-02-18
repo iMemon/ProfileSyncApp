@@ -2,7 +2,8 @@
 using Microsoft.Extensions.Logging;
 using CommunityToolkit.Maui;
 ﻿using CommunityToolkit.Maui.Core;
-using ProfileSyncApp.Views;
+using ProfileSyncApp.Pages;
+using ProfileSyncApp.ViewModels;
 // using Maui.FreakyControls.Extensions;
 
 
@@ -16,15 +17,14 @@ namespace ProfileSyncApp
             builder
                 .UseMauiApp<App>()
                 .UseMauiCommunityToolkit()
+                .ConfigureServices()
+                .ConfigurePages()
+                .ConfigureViewModels()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 });
 
-            // Register dependencies (Dependency Injection)
-            builder.ConfigureServices();
-            builder.ConfigurePages();
-            builder.ConfigureViewModels();
             // builder.InitializeFreakyControls();
 
 #if DEBUG
@@ -43,7 +43,8 @@ public static class MauiAppBuilderExtensions
     {
         builder.Services.AddMauiBlazorWebView();
         builder.Services.AddSingleton<HomePage>();
-        builder.Services.AddTransient<LoadingPage>();
+        builder.Services.AddSingleton<LoadingPage>();
+        builder.Services.AddSingleton<LoginPage>();
 
         return builder;
     }
@@ -55,6 +56,7 @@ public static class MauiAppBuilderExtensions
     }
     public static MauiAppBuilder ConfigureViewModels(this MauiAppBuilder builder)
     {
+        builder.Services.AddSingleton<LoginViewModel>();
         return builder;
     }
 }

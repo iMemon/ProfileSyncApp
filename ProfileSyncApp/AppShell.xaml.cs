@@ -1,4 +1,4 @@
-using ProfileSyncApp.Views;
+using ProfileSyncApp.Pages;
 
 namespace ProfileSyncApp;
 
