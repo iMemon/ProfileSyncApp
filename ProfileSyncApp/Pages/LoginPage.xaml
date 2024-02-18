@@ -5,7 +5,7 @@
     xmlns:freakyControls="clr-namespace:Maui.FreakyControls;assembly=Maui.FreakyControls" Title="LoginPage">
 
     <ScrollView>
-        <VerticalStackLayout Padding="20" VerticalOptions = "Center">
+        <VerticalStackLayout Padding="20">
             <Label Text="Welcome to Profile Sync App" FontSize="24" FontAttributes="Bold" Margin="0,0,0,30" HorizontalTextAlignment="Center"/>
             <Label IsVisible = "False" FontFamily="Consolas" Text="Email"/>
             <Entry x:Name="Email" Text="{Binding Email,Mode=TwoWay}" Margin="0,0,0,0" Placeholder="Email" FontSize="18">

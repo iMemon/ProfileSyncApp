@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 using CommunityToolkit.Maui;
 ﻿using CommunityToolkit.Maui.Core;
 using ProfileSyncApp.Views;
-using Maui.FreakyControls.Extensions;
+// using Maui.FreakyControls.Extensions;
 
 
 namespace ProfileSyncApp
@@ -22,10 +22,10 @@ namespace ProfileSyncApp
                 });
 
             // Register dependencies (Dependency Injection)
-            builder.AddServicesDependencies();
-            builder.AddPagesDependencies();
-            builder.AddViewModelsDependencies();
-            builder.InitializeFreakyControls();
+            builder.ConfigureServices();
+            builder.ConfigurePages();
+            builder.ConfigureViewModels();
+            // builder.InitializeFreakyControls();
 
 #if DEBUG
             builder.Services.AddBlazorWebViewDeveloperTools();
@@ -39,19 +39,22 @@ namespace ProfileSyncApp
 
 public static class MauiAppBuilderExtensions
 {
-    public static void AddPagesDependencies(this MauiAppBuilder builder)
+    public static MauiAppBuilder ConfigurePages(this MauiAppBuilder builder)
     {
         builder.Services.AddMauiBlazorWebView();
         builder.Services.AddSingleton<HomePage>();
         builder.Services.AddTransient<LoadingPage>();
+
+        return builder;
     }
-    public static void AddServicesDependencies(this MauiAppBuilder builder)
+    public static MauiAppBuilder ConfigureServices(this MauiAppBuilder builder)
     {
         builder.Services.AddSingleton<IConnectivity>((e) => Connectivity.Current);
         //builder.Services.AddSingleton<IToast>((e) => new Toaster());
+        return builder;
     }
-    public static void AddViewModelsDependencies(this MauiAppBuilder builder)
+    public static MauiAppBuilder ConfigureViewModels(this MauiAppBuilder builder)
     {
-        
+        return builder;
     }
 }
