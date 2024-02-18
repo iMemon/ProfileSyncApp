@@ -1,25 +1,46 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:controls="clr-namespace:ProfileSyncApp.Controls"
     xmlns:mct="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
     xmlns:viewModels="clr-namespace:ProfileSyncApp.ViewModels"
     x:Class="ProfileSyncApp.Pages.LoginPage" 
     x:DataType="viewModels:LoginViewModel"
-    Shell.NavBarIsVisible="False"
-    Title="LoginPage">
+    Shell.NavBarIsVisible="False" Title="LoginPage">
 
-    <ScrollView>
-        <VerticalStackLayout Padding="20">
-            <Label Text="Welcome to Profile Sync App" FontSize="24" FontAttributes="Bold" Margin="0,0,0,30" HorizontalTextAlignment="Center"/>
-            <Label IsVisible = "False" FontFamily="Consolas" Text="Email"/>
-            <Entry Text="{Binding Email}" Margin="0,0,0,0" Placeholder="Email" FontSize="18">
-            </Entry>
-            <Label IsVisible = "False" FontFamily="Consolas" Text="Password"/>
-            <Entry Text="{Binding Password}" Margin="0,0,0,0" Placeholder="Password" IsPassword="True" FontSize="18">
-            </Entry>
-            <Button Margin="0,20,0,0" x:Name="LoginButton" Command="{Binding LoginCommand}" Text="Login" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand"/>
-            <BoxView Color="Black" Margin="0,20,0,20" HeightRequest="2" HorizontalOptions="Fill" />
-            <Button Margin="0,0,0,0" x:Name="SignupButton" Command="{Binding SignUpCommand}" Text="Create Account" VerticalOptions="CenterAndExpand" BackgroundColor="{AppThemeBinding Light={StaticResource Tertiary}, Dark={StaticResource White}}" HorizontalOptions="FillAndExpand"/>
-        </VerticalStackLayout>
-    </ScrollView>
+    <controls:KeyboardAwareContentView>
+        <ScrollView>
+            <VerticalStackLayout>
+                <Frame CornerRadius="50" WidthRequest="120" HeightRequest="120" Margin="0,20,0,0" Padding="0" BorderColor="Green">
+                    <Image Source="logo.png" WidthRequest="80" HeightRequest="80" VerticalOptions="Center" HorizontalOptions="Center"></Image>
+                </Frame>
+
+                <Label Text="Welcome to Profile Sync App" FontSize="24" FontAttributes="Bold" Margin="0,60,0,0" HorizontalTextAlignment="Center"/>
+
+                <Grid RowDefinitions="*, *, *" Margin="0,60,0,0" Padding="10" RowSpacing="10" HorizontalOptions="Center">
+                    <StackLayout Orientation="Horizontal">
+                        <Image Source="user.png" WidthRequest="30" HeightRequest="30"></Image>
+                        <Entry Text="{Binding Email}" HeightRequest="50" WidthRequest="300" Margin="10,0,0,0" Placeholder="Email Address" FontAttributes="Bold"></Entry>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" Grid.Row="1">
+                        <Image Source="lock.png" WidthRequest="30" HeightRequest="30"></Image>
+                        <Entry Text="{Binding Password}" HeightRequest="50" WidthRequest="300" Margin="10,0,0,0" Placeholder="Password" FontAttributes="Bold" IsPassword="True"></Entry>
+                    </StackLayout>
+
+                    <StackLayout Grid.Row="2" Margin="35,0,0,0" Orientation="Horizontal">
+                        <CheckBox IsChecked="False"></CheckBox>
+                        <Label Text="Remember Me" FontAttributes="Bold" Margin="-10,13,0,0"></Label>
+                    </StackLayout>
+
+                </Grid>
+                <Button Command="{Binding LoginCommand}" FontAttributes="Bold" Text="Login" CornerRadius="10" FontSize="20" VerticalOptions="Center" Margin="30,0,30,0"></Button>
+
+                <StackLayout Margin="0,35,0,0" Orientation="Horizontal" HorizontalOptions="Center">
+                    <Label Text="New User?" HorizontalOptions="Center" VerticalOptions="Center" TextColor="Blue" FontSize="Small"></Label>
+                    <Button Text="Sign Up" Command="{Binding SignUpCommand}" FontSize="Small" TextColor="Green" BorderWidth="0" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="Transparent"></Button>
+                </StackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+    </controls:KeyboardAwareContentView>
 </ContentPage>

@@ -1,6 +1,4 @@
-﻿using Android.Print;
-
-namespace ProfileSyncApp.ViewModels;
+﻿namespace ProfileSyncApp.ViewModels;
 
 public partial class LoginViewModel: ViewModelBase
 {
@@ -45,7 +43,7 @@ public partial class LoginViewModel: ViewModelBase
     [RelayCommand]
     async Task SignUp()
     {
-        
+
     }
 
     bool IsCredentialCorrect(string username, string password)
