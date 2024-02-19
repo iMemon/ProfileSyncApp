@@ -1,6 +1,6 @@
 ﻿namespace ProfileSyncApp.ViewModels;
 
-public partial class ViewModelBase : ObservableObject
+public abstract partial class ViewModelBase : ObservableObject
 {
     [ObservableProperty]
     public bool _isBusy;

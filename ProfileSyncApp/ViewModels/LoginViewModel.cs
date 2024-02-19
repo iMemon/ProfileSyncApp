@@ -2,6 +2,19 @@
 using ProfileSyncApp.Pages;
 using ProfileSyncApp.Models;
 
+using System;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
+
+public static class StringExtensions 
+{
+    public static bool IsValidEmail(this string str)
+    { 
+        string regex = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+        return Regex.IsMatch(str, regex, RegexOptions.IgnoreCase);
+    } 
+}
+
 public partial class LoginViewModel: ViewModelBase
 {
     private readonly LoginService loginService;
@@ -19,18 +32,16 @@ public partial class LoginViewModel: ViewModelBase
     }
 
     [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(LoginCommand))]
     string email;
 
     [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(LoginCommand))]
     string password;
 
-    // [RelayCommand]
-    // Task Signup()
-    // {
-    //     Console.WriteLine(""); 
-    // }
+    private bool CanLogin() => !string.IsNullOrWhiteSpace(Email) && !string.IsNullOrWhiteSpace(Password) && Email.IsValidEmail();
 
-    [RelayCommand]
+    [RelayCommand(CanExecute = nameof(CanLogin))]
     async Task Login()
     {
         if (this.connectivity.NetworkAccess != NetworkAccess.Internet) 
@@ -38,8 +49,6 @@ public partial class LoginViewModel: ViewModelBase
             await Application.Current.MainPage.DisplayAlert("Error", "No Internet Access", "Ok");
             return;
         }
-
-        // TODO: Text Validation
 
         User user = await loginService.Login(Email, Password);
         if (user == null)
