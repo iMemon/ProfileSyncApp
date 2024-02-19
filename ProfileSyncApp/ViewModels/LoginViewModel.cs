@@ -33,7 +33,8 @@ public partial class LoginViewModel: ViewModelBase
         if (IsCredentialCorrect(Email, Password))
         {
             Preferences.Default.Set("hasAuth", true);
-            await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
+            // await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
+            Application.Current.MainPage = new AppShell();
         }
         else
         {

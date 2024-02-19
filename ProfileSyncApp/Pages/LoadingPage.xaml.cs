@@ -1,5 +1,6 @@
 using ProfileSyncApp;
 using ProfileSyncApp.ViewModels;
+using ProfileSyncApp.Pages;
 
 namespace ProfileSyncApp.Pages;
 
@@ -16,11 +17,13 @@ public partial class LoadingPage : ContentPage
     {
         if (await isAuthenticated())
         {
-            await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
+            // await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
+            Application.Current.MainPage = new AppShell();
         }
         else
         {
-            await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
+            // await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
+            Application.Current.MainPage = new NavigationPage(root: new LoginPage(vm: new LoginViewModel()));
         }
         base.OnNavigatedTo(args);
     }

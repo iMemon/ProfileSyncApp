@@ -7,6 +7,7 @@
     xmlns:pages="clr-namespace:ProfileSyncApp.Pages"
     Shell.FlyoutBehavior="Disabled">
 
+    <!--
     <ShellContent
         ContentTemplate="{DataTemplate pages:LoadingPage}"
         Route="LoadingPage" />
@@ -14,21 +15,22 @@
         Title="Login"
         ContentTemplate="{DataTemplate pages:LoginPage}"
         Route="LoginPage"/>
+    -->
 
-    <TabBar Route = "HomePage">
-        <Tab Title="Home" Icon="house_door_fill.svg">
+    <TabBar Route = "ProfilePage">
+        <Tab Title="Home" Icon="house_door_fill">
             <ShellContent
                 Title="Home"
                 ContentTemplate="{DataTemplate pages:HomePage}"
                 Route="HomePage" />
         </Tab>
-        <Tab Title="Profile" Icon="heart_fill.svg">
+        <Tab Title="Profile" Icon="heart_fill">
             <ShellContent
                 Title="Profile"
                 ContentTemplate="{DataTemplate pages:ProfilePage}"
                 Route="ProfilePage" />
         </Tab>
-        <Tab Title="Settings" Icon="gear_fill.svg">
+        <Tab Title="Settings" Icon="gear_fill">
             <ShellContent
                 Title="Settings"
                 ContentTemplate="{DataTemplate pages:SettingsPage}"
