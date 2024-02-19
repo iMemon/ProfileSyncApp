@@ -42,9 +42,11 @@ public static class MauiAppBuilderExtensions
     public static MauiAppBuilder ConfigurePages(this MauiAppBuilder builder)
     {
         builder.Services.AddMauiBlazorWebView();
-        builder.Services.AddSingleton<HomePage>();
         builder.Services.AddSingleton<LoadingPage>();
         builder.Services.AddSingleton<LoginPage>();
+        builder.Services.AddSingleton<HomePage>();
+        builder.Services.AddSingleton<ProfilePage>();
+        builder.Services.AddSingleton<SettingsPage>();
 
         return builder;
     }
@@ -56,6 +58,7 @@ public static class MauiAppBuilderExtensions
     }
     public static MauiAppBuilder ConfigureViewModels(this MauiAppBuilder builder)
     {
+        builder.Services.AddSingleton<LoadingViewModel>();
         builder.Services.AddSingleton<LoginViewModel>();
         return builder;
     }

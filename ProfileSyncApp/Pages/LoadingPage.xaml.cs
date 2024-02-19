@@ -1,23 +1,26 @@
+using ProfileSyncApp;
+using ProfileSyncApp.ViewModels;
+
 namespace ProfileSyncApp.Pages;
 
 public partial class LoadingPage : ContentPage
 {
     IConnectivity connectivity;
-    public LoadingPage(IConnectivity connectivity)
+    public LoadingPage(LoadingViewModel vm, IConnectivity connectivity)
     {
         InitializeComponent();
         this.connectivity = connectivity;
-        Console.WriteLine("test");
+        BindingContext = vm;
     }
     protected override async void OnNavigatedTo(NavigatedToEventArgs args)
     {
         if (await isAuthenticated())
         {
-            await Shell.Current.GoToAsync("///home");
+            await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
         }
         else
         {
-            await Shell.Current.GoToAsync("///login");
+            await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
         }
         base.OnNavigatedTo(args);
     }
@@ -25,7 +28,7 @@ public partial class LoadingPage : ContentPage
     async Task<bool> isAuthenticated()
     {
         await Task.Delay(2000);
-        var hasAuth = await SecureStorage.GetAsync("hasAuth");
-        return !(hasAuth == null);
+        var hasAuth = Preferences.Default.Get("hasAuth", false);
+        return hasAuth;
     }
 }

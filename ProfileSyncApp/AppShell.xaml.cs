@@ -8,10 +8,13 @@ public partial class AppShell : Shell
     {
         InitializeComponent();
 
+        this.BindingContext = new AppShellViewModel();
+
         //Register all routes
-        Routing.RegisterRoute("login", typeof(LoginPage));
+        Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
+        Routing.RegisterRoute(nameof(LoadingPage), typeof(LoadingPage));
         Routing.RegisterRoute(nameof(HomePage), typeof(HomePage));
-        Routing.RegisterRoute("home", typeof(ProfilePage));
-        Routing.RegisterRoute("settings", typeof(SettingsPage));
+        Routing.RegisterRoute(nameof(ProfilePage), typeof(ProfilePage));
+        Routing.RegisterRoute(nameof(SettingsPage), typeof(SettingsPage));
     }
 }

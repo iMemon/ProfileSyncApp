@@ -1,4 +1,5 @@
 ﻿namespace ProfileSyncApp.ViewModels;
+using ProfileSyncApp.Pages;
 
 public partial class LoginViewModel: ViewModelBase
 {
@@ -31,8 +32,8 @@ public partial class LoginViewModel: ViewModelBase
     {
         if (IsCredentialCorrect(Email, Password))
         {
-            await SecureStorage.SetAsync("hasAuth", "true");
-            await Shell.Current.GoToAsync("///home");
+            Preferences.Default.Set("hasAuth", true);
+            await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
         }
         else
         {
