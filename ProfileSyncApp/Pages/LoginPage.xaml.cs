@@ -1,39 +1,32 @@
-namespace ProfileSyncApp.Views;
+using ProfileSyncApp.ViewModels;
+using ProfileSyncApp.Helpers;
+namespace ProfileSyncApp.Pages;
 
 public partial class LoginPage : ContentPage
 {
-    public LoginPage()
+    LoginViewModel vm => BindingContext as LoginViewModel;
+
+    public LoginPage(): base()
     {
         InitializeComponent();
+        BindingContext = ServiceHelper.Current.GetService<LoginViewModel>();
     }
 
+    public LoginPage(LoginViewModel vm)
+    {
+        InitializeComponent();
+        BindingContext = vm;
+    }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        await vm.InitializeAsync();
+    }
+    
     protected override bool OnBackButtonPressed()
     {
         Application.Current.Quit();
         return true;
-    }
-
-    private async void LoginButton_Clicked(object sender, EventArgs e)
-    {
-        if (IsCredentialCorrect(Email.Text, Password.Text))
-        {
-            await SecureStorage.SetAsync("hasAuth", "true");
-            await Shell.Current.GoToAsync("///home");
-        }
-        else
-        {
-            await DisplayAlert("Login failed", "Username or password if invalid", "OK");
-        }
-    }
-
-    private async void SignupButton_Clicked(object sender, EventArgs e)
-    {
-        
-    }
-
-
-    bool IsCredentialCorrect(string username, string password)
-    {
-        return Email.Text == "admin" && Password.Text == "1234";
     }
 }

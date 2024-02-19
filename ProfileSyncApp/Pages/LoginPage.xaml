@@ -1,43 +1,61 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ProfileSyncApp.Views.LoginPage"
-             Shell.NavBarIsVisible="False"
-             xmlns:mct="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
-             Title="LoginPage">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:ProfileSyncApp.Controls"
+    xmlns:mct="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:viewModels="clr-namespace:ProfileSyncApp.ViewModels" x:Class="ProfileSyncApp.Pages.LoginPage" x:DataType="viewModels:LoginViewModel" Shell.NavBarIsVisible="False" Title="LoginPage">
 
-            <ScrollView> 
-                <VerticalStackLayout Padding="10" VerticalOptions="Center" HorizontalOptions="CenterAndExpand">
-        
-        <Label Text="Welcome to Profile Sync App" FontSize="24" FontAttributes="Bold" Margin="0,0,0,30" />
-        <Label FontFamily="Consolas" Text="Email"/>
-        <Frame CornerRadius="10" Padding="3" Margin="0,5,0,0">
-            <Entry x:Name="Email" Text="{Binding Email,Mode=TwoWay}" Margin="5,0,0,0" Placeholder="Email" FontSize="18">
-            </Entry>
-        </Frame>
-        <Label FontFamily="Consolas" Text="Password"/>
-        <Frame CornerRadius="10" Padding="3" Margin="0,5,0,0">
-            <Entry x:Name="Password" Text="{Binding Password,Mode=TwoWay}" Margin="5,0,0,0" Placeholder="Password" IsPassword="True" FontSize="18">
-                <Entry.Behaviors>
+    <controls:KeyboardAwareContentView>
+        <ScrollView>
+            <VerticalStackLayout>
+                <Frame CornerRadius="50" WidthRequest="120" HeightRequest="120" Margin="0,20,0,0" Padding="0" BorderColor="Green">
+                    <Image Source="logo.png" WidthRequest="80" HeightRequest="80" VerticalOptions="Center" HorizontalOptions="Center"></Image>
+                </Frame>
 
-                </Entry.Behaviors>
-            </Entry>
-        </Frame>
-        <Button Margin="0,20,0,0"
-                       x:Name="LoginButton"
-                       Clicked="LoginButton_Clicked"
-                       Text="Login" VerticalOptions="CenterAndExpand" 
-                       HorizontalOptions="FillAndExpand"/>
+                <Label Text="Welcome to Profile Sync App" FontSize="24" FontAttributes="Bold" Margin="0,60,0,0" HorizontalTextAlignment="Center"/>
 
-        <BoxView Color="Black" Margin="0,20,0,20" HeightRequest="2" HorizontalOptions="Fill" />
-        <Button Margin="0,0,0,0"
-                x:Name="SignupButton"
-                Clicked="SignupButton_Clicked"
-                Text="Create Account" VerticalOptions="CenterAndExpand"
-                BackgroundColor="{AppThemeBinding Light={StaticResource Tertiary}, Dark={StaticResource White}}"
-                HorizontalOptions="FillAndExpand"/>
-    </VerticalStackLayout>
-            </ScrollView>
-    
+                <Grid RowDefinitions="*, *, *" Margin="0,60,0,0" Padding="10" RowSpacing="10" HorizontalOptions="Center">
+                    <VerticalStackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Image Source="user.png" WidthRequest="30" HeightRequest="30"></Image>
+                            <Entry x:Name = "txtEmail" Text="{Binding Email}" HeightRequest="50" WidthRequest="300" Margin="10,0,0,0" Placeholder="Email Address" FontAttributes="Bold" toolkit:SetFocusOnEntryCompletedBehavior.NextElement="{x:Reference txtPassword}">
+                                <Entry.Behaviors>
+                                    <mct:EmailValidationBehavior x:Name="txtEmailValidator" Flags="ValidateOnUnfocusing" DecorationFlags="Trim"
+                                    ValidStyle="{StaticResource ValidEntryStyle}" InvalidStyle="{StaticResource InvalidEntryStyle}"/>
+                                </Entry.Behaviors>
+                            </Entry>
+                        </StackLayout>
+                        <Label Text="Invalid Email" VerticalTextAlignment="Start" HorizontalTextAlignment="End" 
+                        HorizontalOptions="End" VerticalOptions="Start" TextColor="Red" FontSize="12" 
+                        IsVisible="{Binding IsNotValid, Source={x:Reference txtEmailValidator}}"/>
+                    </VerticalStackLayout>
 
+                    <StackLayout Orientation="Horizontal" Grid.Row="1">
+                        <Image Source="lock.png" WidthRequest="30" HeightRequest="30"></Image>
+                        <Entry x:Name = "txtPassword" Text="{Binding Password}" HeightRequest="50" WidthRequest="300" Margin="10,0,0,0" Placeholder="Password" FontAttributes="Bold" IsPassword="True"></Entry>
+                    </StackLayout>
+
+                    <StackLayout Grid.Row="2" Margin="35,0,0,0" Orientation="Horizontal">
+                        <CheckBox IsChecked="False"></CheckBox>
+                        <Label Text="Remember Me" FontAttributes="Bold" Margin="-10,13,0,0"></Label>
+                    </StackLayout>
+
+                </Grid>
+                <Button Command="{Binding LoginCommand}" FontAttributes="Bold" Text="Login" CornerRadius="10" FontSize="20" VerticalOptions="Center" Margin="30,0,30,0">
+                    <Button.IsEnabled>
+                        <MultiBinding Converter="{StaticResource AllNotNullOrEmptyConverter}">
+                            <Binding Path="Text" Source="{x:Reference txtEmail}}"/>
+                            <Binding Path="Text" Source="{x:Reference txtPassword}}"/>
+                        </MultiBinding>
+                    </Button.IsEnabled>
+                </Button>
+
+                <StackLayout Margin="0,35,0,0" Orientation="Horizontal" HorizontalOptions="Center">
+                    <Label Text="New User?" HorizontalOptions="Center" VerticalOptions="Center" TextColor="Blue" FontSize="Small"></Label>
+                    <Button Text="Sign Up" Command="{Binding SignUpCommand}" FontSize="Small" TextColor="Green" BorderWidth="0" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="Transparent"></Button>
+                </StackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+    </controls:KeyboardAwareContentView>
 </ContentPage>

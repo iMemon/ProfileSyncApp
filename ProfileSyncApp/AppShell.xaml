@@ -4,45 +4,37 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:ProfileSyncApp"
-    xmlns:views="clr-namespace:ProfileSyncApp.Views"
+    xmlns:pages="clr-namespace:ProfileSyncApp.Pages"
     Shell.FlyoutBehavior="Disabled">
 
-    <!--Loading Page-->
+    <!--
     <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate views:LoadingPage}"
-        Route="loading" />
-
-    <!--Login Page-->
+        ContentTemplate="{DataTemplate pages:LoadingPage}"
+        Route="LoadingPage" />
     <ShellContent 
-        Title="Login" 
-        ContentTemplate="{DataTemplate views:LoginPage}"
-        Route="login"/>
-    
-    <!--Main Page-->
-    <TabBar>
-        <Tab Title="Home" Icon="house_door_fill.svg">
+        Title="Login"
+        ContentTemplate="{DataTemplate pages:LoginPage}"
+        Route="LoginPage"/>
+    -->
+
+    <TabBar Route = "ProfilePage">
+        <Tab Title="Home" Icon="house_door_fill">
             <ShellContent
-                Icon="house_door_fill.svg"
                 Title="Home"
-                ContentTemplate="{DataTemplate views:HomePage}"
-                Route="home" />
+                ContentTemplate="{DataTemplate pages:HomePage}"
+                Route="HomePage" />
         </Tab>
-
-        <Tab Title="Profile" Icon="house_door_fill.svg">
+        <Tab Title="Profile" Icon="heart_fill">
             <ShellContent
-                Icon="house_door_fill.svg"
                 Title="Profile"
-                ContentTemplate="{DataTemplate views:ProfilePage}"
-                Route="profile" />
+                ContentTemplate="{DataTemplate pages:ProfilePage}"
+                Route="ProfilePage" />
         </Tab>
-
-        <Tab Title="Settings" Icon="gear_fill.svg">
+        <Tab Title="Settings" Icon="gear_fill">
             <ShellContent
-                Icon="house_door_fill.svg"
                 Title="Settings"
-                ContentTemplate="{DataTemplate views:SettingsPage}"
-                Route="settings" />
+                ContentTemplate="{DataTemplate pages:SettingsPage}"
+                Route="SettingsPage" />
         </Tab>
     </TabBar>
 </Shell>
