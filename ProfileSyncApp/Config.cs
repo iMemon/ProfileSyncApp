@@ -13,8 +13,7 @@ public static class Config
 #endif
         }
     }
-
-    public static string BaseWeb = $"{Base}:5002/";
-    public static string Base = DeviceInfo.Platform == DevicePlatform.Android ? "http://10.0.2.2" : "http://localhost";
-    public static string APIUrl = $"{Base}:5003/";
+    // public static string Base = DeviceInfo.Platform == DevicePlatform.Android ? "http://10.0.2.2" : "http://localhost";
+    public static string Base = DeviceInfo.Platform == DevicePlatform.Android ? "http://192.168.100.15" : "http://192.168.100.15";
+    public static string APIUrl = $"{Base}:7007/";
 }

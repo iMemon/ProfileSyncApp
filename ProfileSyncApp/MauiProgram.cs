@@ -4,6 +4,7 @@ using CommunityToolkit.Maui;
 ﻿using CommunityToolkit.Maui.Core;
 using ProfileSyncApp.Pages;
 using ProfileSyncApp.ViewModels;
+using ProfileSyncApp;
 // using Maui.FreakyControls.Extensions;
 
 
@@ -53,6 +54,7 @@ public static class MauiAppBuilderExtensions
     public static MauiAppBuilder ConfigureServices(this MauiAppBuilder builder)
     {
         builder.Services.AddSingleton<IConnectivity>((e) => Connectivity.Current);
+        builder.Services.AddSingleton<LoginService>((e) => new LoginService());
         //builder.Services.AddSingleton<IToast>((e) => new Toaster());
         return builder;
     }

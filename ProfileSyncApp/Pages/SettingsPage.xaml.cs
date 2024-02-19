@@ -14,7 +14,7 @@ public partial class SettingsPage : ContentPage
 		{
 			Preferences.Default.Clear();
 			// await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
-			Application.Current.MainPage = new NavigationPage(root: new LoginPage(vm: new LoginViewModel()));
+			Application.Current.MainPage = new NavigationPage(root: new LoginPage());
 		}
 	}
 }

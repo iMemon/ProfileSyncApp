@@ -1,13 +1,16 @@
 ﻿namespace ProfileSyncApp.ViewModels;
 using ProfileSyncApp.Pages;
+using ProfileSyncApp.Models;
 
 public partial class LoginViewModel: ViewModelBase
 {
-    // private readonly ShowsService showsService;
+    private readonly LoginService loginService;
+    private readonly IConnectivity connectivity;
 
-    public LoginViewModel()
+    public LoginViewModel(IConnectivity connectivity, LoginService loginService)
     {
-        
+        this.loginService = loginService;
+        this.connectivity = connectivity;
     }
 
     public async Task InitializeAsync()
@@ -30,16 +33,23 @@ public partial class LoginViewModel: ViewModelBase
     [RelayCommand]
     async Task Login()
     {
-        if (IsCredentialCorrect(Email, Password))
+        if (this.connectivity.NetworkAccess != NetworkAccess.Internet) 
         {
-            Preferences.Default.Set("hasAuth", true);
-            // await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
-            Application.Current.MainPage = new AppShell();
+            await Application.Current.MainPage.DisplayAlert("Error", "No Internet Access", "Ok");
+            return;
         }
-        else
+
+        // TODO: Text Validation
+
+        User user = await loginService.Login(Email, Password);
+        if (user == null)
         {
-            await Application.Current.MainPage.DisplayAlert("Login failed", "Username or password if invalid", "OK");
+            await Application.Current.MainPage.DisplayAlert("Error", "Invalid Credentials", "OK");
+            return;
         }
+
+        Preferences.Default.Set("hasAuth", true);
+        Application.Current.MainPage = new AppShell();
     }
 
     [RelayCommand]

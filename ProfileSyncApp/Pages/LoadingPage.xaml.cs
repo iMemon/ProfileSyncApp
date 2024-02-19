@@ -1,12 +1,21 @@
 using ProfileSyncApp;
 using ProfileSyncApp.ViewModels;
 using ProfileSyncApp.Pages;
+using ProfileSyncApp.Helpers;
 
 namespace ProfileSyncApp.Pages;
 
 public partial class LoadingPage : ContentPage
 {
     IConnectivity connectivity;
+
+    public LoadingPage(): base()
+    {
+        InitializeComponent();
+        this.connectivity = ServiceHelper.Current.GetService<IConnectivity>();
+        BindingContext = ServiceHelper.Current.GetService<LoadingViewModel>();;
+    }
+
     public LoadingPage(LoadingViewModel vm, IConnectivity connectivity)
     {
         InitializeComponent();
@@ -23,7 +32,7 @@ public partial class LoadingPage : ContentPage
         else
         {
             // await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
-            Application.Current.MainPage = new NavigationPage(root: new LoginPage(vm: new LoginViewModel()));
+            Application.Current.MainPage = new NavigationPage(root: new LoginPage());
         }
         base.OnNavigatedTo(args);
     }
