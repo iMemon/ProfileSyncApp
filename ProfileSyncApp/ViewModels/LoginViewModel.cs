@@ -64,11 +64,6 @@ public partial class LoginViewModel: ViewModelBase
     [RelayCommand]
     async Task SignUp()
     {
-
-    }
-
-    bool IsCredentialCorrect(string username, string password)
-    {
-        return Email == "admin" && Password == "1234";
+        // TODO: Show Signup screen
     }
 }
